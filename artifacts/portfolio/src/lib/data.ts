@@ -61,7 +61,7 @@ export const projects = [
     category: "Frontend",
     tech: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
     github: "#",
-    live: "#",
+    live: "https://hellofixy.com",
     color: "from-emerald-500/20 to-teal-500/20"
   },
   {
@@ -71,7 +71,7 @@ export const projects = [
     category: "Full Stack",
     tech: ["React.js", "Things Board", "PostgreSQL", "REST APIs"],
     github: "#",
-    live: "#",
+    live: "https://www.utvyakta.com/",
     color: "from-violet-500/20 to-fuchsia-500/20"
   },
   {

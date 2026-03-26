@@ -1,26 +1,46 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin } from 'lucide-react';
+import { Send, Mail, MapPin, Phone } from 'lucide-react';
 import { personalInfo } from '@/lib/data';
-import { useToast } from '@/hooks/use-toast';
 
 export function Contact() {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.id]: e.target.value }));
+    if (status !== 'idle') setStatus('idle');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate network request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: "Message sent successfully!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
+    setStatus('idle');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
       });
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus('success');
+        setForm({ name: '', email: '', phone: '', message: '' });
+      } else {
+        setStatus('error');
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setStatus('error');
+      setErrorMsg('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -63,11 +83,22 @@ export function Contact() {
               </div>
               <div className="flex items-center gap-4 group">
                 <div className="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-secondary border-secondary/20 group-hover:border-secondary/50 group-hover:shadow-[0_0_15px_hsl(var(--secondary)/0.3)] transition-all">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-1">Phone</div>
+                  <a href={`tel:${personalInfo.phone}`} className="text-white font-medium hover:text-secondary transition-colors text-lg">
+                    {personalInfo.phone}
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 group">
+                <div className="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-accent border-accent/20 group-hover:border-accent/50 group-hover:shadow-[0_0_15px_hsl(var(--accent)/0.3)] transition-all">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-1">Location</div>
-                  <div className="text-white font-medium text-lg">India (Remote)</div>
+                  <div className="text-white font-medium text-lg">{personalInfo.location}</div>
                 </div>
               </div>
             </div>
@@ -80,36 +111,55 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 rounded-3xl flex flex-col gap-6 relative overflow-hidden">
-              {/* Subtle form glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name" className="text-sm font-bold tracking-wide text-white/80 ml-1">Name</label>
+                  <label htmlFor="name" className="text-sm font-bold tracking-wide text-white/80 ml-1">Name *</label>
                   <input 
                     type="text" 
-                    id="name" 
+                    id="name"
+                    value={form.name}
+                    onChange={handleChange}
                     required
                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary focus:shadow-[0_0_15px_hsl(var(--primary)/0.3)] transition-all"
                     placeholder="John Doe"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="text-sm font-bold tracking-wide text-white/80 ml-1">Email</label>
+                  <label htmlFor="email" className="text-sm font-bold tracking-wide text-white/80 ml-1">Email *</label>
                   <input 
                     type="email" 
-                    id="email" 
+                    id="email"
+                    value={form.email}
+                    onChange={handleChange}
                     required
                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary focus:shadow-[0_0_15px_hsl(var(--primary)/0.3)] transition-all"
                     placeholder="john@example.com"
                   />
                 </div>
               </div>
+
+              <div className="flex flex-col gap-2 relative z-10">
+                <label htmlFor="phone" className="text-sm font-bold tracking-wide text-white/80 ml-1">
+                  Phone <span className="text-white/40 font-normal">(optional – for SMS reply)</span>
+                </label>
+                <input 
+                  type="tel" 
+                  id="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary focus:shadow-[0_0_15px_hsl(var(--secondary)/0.3)] transition-all"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
               
               <div className="flex flex-col gap-2 relative z-10">
-                <label htmlFor="message" className="text-sm font-bold tracking-wide text-white/80 ml-1">Message</label>
+                <label htmlFor="message" className="text-sm font-bold tracking-wide text-white/80 ml-1">Message *</label>
                 <textarea 
-                  id="message" 
+                  id="message"
+                  value={form.message}
+                  onChange={handleChange}
                   rows={5}
                   required
                   className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary focus:shadow-[0_0_15px_hsl(var(--primary)/0.3)] transition-all resize-none"
@@ -117,13 +167,30 @@ export function Contact() {
                 ></textarea>
               </div>
 
+              {status === 'success' && (
+                <div className="relative z-10 px-4 py-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-medium text-sm flex items-center gap-2">
+                  <span>✓</span> Message sent! I'll get back to you soon.
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="relative z-10 px-4 py-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 font-medium text-sm flex items-center gap-2">
+                  <span>✗</span> {errorMsg}
+                </div>
+              )}
+
               <button 
                 type="submit" 
                 disabled={isSubmitting}
                 className="w-full py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_25px_hsl(var(--primary)/0.5)] hover:scale-[1.02] transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none relative z-10"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-                {!isSubmitting && <Send className="w-5 h-5" />}
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Sending...
+                  </span>
+                ) : (
+                  <>Send Message <Send className="w-5 h-5" /></>
+                )}
               </button>
             </form>
           </motion.div>
