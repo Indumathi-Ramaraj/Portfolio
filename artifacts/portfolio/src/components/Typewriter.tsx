@@ -50,7 +50,7 @@ export function Typewriter({
       <motion.span
         animate={{ opacity: [0, 1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-        className="absolute -right-2 top-0 bottom-0 w-[3px] bg-primary"
+        className="absolute -right-2 top-0 bottom-0 w-[3px] bg-white/70"
       />
     </span>
   );
