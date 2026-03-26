@@ -20,7 +20,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <motion.div 
-            className="lg:col-span-8 flex flex-col items-start"
+            className="lg:col-span-7 flex flex-col items-start"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -74,27 +74,38 @@ export function Hero() {
           </motion.div>
 
           <motion.div 
-            className="lg:col-span-4 hidden lg:block relative"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="lg:col-span-5 hidden lg:block relative"
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            {/* Abstract Decorative Element instead of a photo */}
-            <div className="relative w-full aspect-square max-w-[400px] mx-auto">
-              {/* Large blurred gradient blob */}
-              <div className="absolute -inset-10 rounded-full bg-gradient-to-tr from-primary/40 via-secondary/20 to-primary/30 blur-[80px] animate-pulse" style={{ animationDuration: '6s' }}></div>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/40 to-secondary/40 blur-3xl animate-pulse" style={{ animationDuration: '4s' }}></div>
-              
-              <div className="absolute inset-4 rounded-[2rem] glass-card border border-white/10 flex items-center justify-center overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-500 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-secondary/30"></div>
-                <span className="font-display font-bold text-9xl text-white/90 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]">IR</span>
+            <div className="relative w-full max-w-[420px] mx-auto">
+              {/* Glow blobs behind photo */}
+              <div className="absolute -inset-8 rounded-full bg-gradient-to-tr from-primary/50 via-secondary/20 to-primary/30 blur-[70px] animate-pulse" style={{ animationDuration: '6s' }}></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/30 to-secondary/30 blur-2xl animate-pulse" style={{ animationDuration: '4s' }}></div>
+
+              {/* Profile photo card */}
+              <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.7)] rotate-2 hover:rotate-0 transition-transform duration-700 aspect-[3/4]">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10 z-10"></div>
+                <img 
+                  src="/profile.jpeg"
+                  alt="Indumathi Ramaraj"
+                  className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+                />
+                {/* Name badge at bottom of photo */}
+                <div className="absolute bottom-4 left-4 right-4 z-20">
+                  <div className="glass-card px-4 py-3 rounded-xl border border-white/10 backdrop-blur-xl">
+                    <div className="font-display font-bold text-white text-lg leading-tight">Indumathi Ramaraj</div>
+                    <div className="text-primary text-sm font-medium">Software Developer</div>
+                  </div>
+                </div>
               </div>
-              
+
               {/* Floating tech badges */}
               <motion.div 
                 animate={{ y: [0, -15, 0] }} 
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -right-6 glass-card px-4 py-2 rounded-xl border border-primary/40 shadow-[0_0_20px_hsl(var(--primary)/0.3)] backdrop-blur-xl"
+                className="absolute -top-4 -right-4 glass-card px-4 py-2 rounded-xl border border-primary/40 shadow-[0_0_20px_hsl(var(--primary)/0.3)] backdrop-blur-xl z-20"
               >
                 <span className="font-bold text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]">React</span>
               </motion.div>
@@ -102,7 +113,7 @@ export function Hero() {
               <motion.div 
                 animate={{ y: [0, 15, 0] }} 
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-6 -left-6 glass-card px-4 py-2 rounded-xl border border-secondary/40 shadow-[0_0_20px_hsl(var(--secondary)/0.3)] backdrop-blur-xl"
+                className="absolute -bottom-4 -left-4 glass-card px-4 py-2 rounded-xl border border-secondary/40 shadow-[0_0_20px_hsl(var(--secondary)/0.3)] backdrop-blur-xl z-20"
               >
                 <span className="font-bold text-secondary drop-shadow-[0_0_8px_hsl(var(--secondary)/0.5)]">Node.js</span>
               </motion.div>
@@ -110,7 +121,7 @@ export function Hero() {
               <motion.div 
                 animate={{ y: [0, -12, 0], x: [0, 5, 0] }} 
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-1/4 -left-12 glass-card px-4 py-2 rounded-xl border border-accent/40 shadow-[0_0_20px_hsl(var(--accent)/0.3)] backdrop-blur-xl z-20"
+                className="absolute top-1/3 -left-10 glass-card px-4 py-2 rounded-xl border border-accent/40 shadow-[0_0_20px_hsl(var(--accent)/0.3)] backdrop-blur-xl z-20"
               >
                 <span className="font-bold text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)]">TypeScript</span>
               </motion.div>
@@ -119,23 +130,6 @@ export function Hero() {
 
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground z-10"
-      >
-        <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-muted-foreground/50 to-transparent relative overflow-hidden">
-          <motion.div 
-            animate={{ y: ['-100%', '100%'] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-full h-1/2 bg-primary"
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }
