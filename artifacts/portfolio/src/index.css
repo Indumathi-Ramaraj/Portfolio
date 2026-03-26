@@ -32,15 +32,16 @@
   --background: 240 10% 4%;
   --foreground: 0 0% 95%;
   
-  /* Electric Violet */
-  --primary: 262 83% 58%;
+  /* Vivid Rose/Coral */
+  --primary: 340 82% 58%;
   --primary-foreground: 0 0% 100%;
   
-  /* Cyan/Teal */
-  --secondary: 189 94% 43%;
+  /* Warm Amber/Orange */
+  --secondary: 25 95% 55%;
   --secondary-foreground: 0 0% 100%;
   
-  --accent: 316 73% 52%;
+  /* Sky Blue */
+  --accent: 197 71% 52%;
   --accent-foreground: 0 0% 100%;
   
   --muted: 240 5% 15%;
@@ -87,6 +88,14 @@
   
   .glass-card {
     @apply bg-white/[0.02] backdrop-blur-md border border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+  }
+
+  .glow-card {
+    @apply relative transition-all duration-300;
+  }
+  
+  .glow-card:hover {
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.4);
   }
 
   .glass-panel {

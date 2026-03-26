@@ -52,48 +52,21 @@ export const projects = [
     live: "#",
     color: "from-emerald-500/20 to-teal-500/20"
   },
-  {
-    id: 4,
-    title: "Portfolio Generator",
-    description: "A SaaS tool allowing developers to generate beautifully designed, customizable portfolio sites from their GitHub data.",
-    category: "Frontend",
-    tech: ["Vue.js", "Framer Motion", "Firebase", "CSS Modules"],
-    github: "#",
-    live: "#",
-    color: "from-orange-500/20 to-red-500/20"
-  },
-  {
-    id: 5,
-    title: "Food Delivery App",
-    description: "A mobile-first progressive web app for local food delivery, featuring live driver tracking and complex order routing.",
-    category: "Mobile",
-    tech: ["React Native", "Node.js", "Google Maps API", "PostgreSQL"],
-    github: "#",
-    live: "#",
-    color: "from-yellow-500/20 to-amber-500/20"
-  }
 ];
 
 export const experience = [
   {
     id: 1,
     role: "Full Stack Developer",
-    company: "Tech Solutions Inc.",
+    company: "HMGTechnology Pvt Ltd",
     period: "2022 - Present",
-    description: "Leading the development of enterprise-scale web applications. Architected and deployed microservices that increased system efficiency by 40%."
+    description: "Leading the development of enterprise-scale web applications. Architected and deployed microservices using React, Node.js, and PostgreSQL, improving system performance and scalability for production environments."
   },
   {
     id: 2,
     role: "Frontend Engineer",
-    company: "Creative Digital",
+    company: "BoostMyShop",
     period: "2020 - 2022",
-    description: "Developed interactive, highly responsive user interfaces for global clients. Spearheaded the migration from legacy codebases to modern React stacks."
-  },
-  {
-    id: 3,
-    role: "UI/UX Designer & Developer Intern",
-    company: "Design Labs",
-    period: "2019 - 2020",
-    description: "Bridged the gap between design and engineering. Created high-fidelity prototypes in Figma and translated them into pixel-perfect frontend code."
+    description: "Developed interactive, highly responsive user interfaces for e-commerce solutions. Built and maintained robust frontend features using React and TypeScript, delivering seamless shopping experiences for global clients."
   }
 ];
