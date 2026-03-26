@@ -40,7 +40,7 @@ export function Experience() {
                       <div className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-lg">
                         {item.company}
                       </div>
-                      {item.company.includes("HMGTechnology") && (
+                      {item.current && (
                         <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 border border-secondary/20 rounded-md">
                           Current
                         </span>

@@ -65,9 +65,8 @@ export function Navigation() {
               <Linkedin className="w-5 h-5" />
             </a>
             <a 
-              href={personalInfo.resume} 
-              target="_blank" 
-              rel="noreferrer"
+              href={personalInfo.resume}
+              download="Indumathi_Ramaraj_Resume.pdf"
               className="px-5 py-2 rounded-full text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 transition-all duration-300 text-white"
             >
               Resume
