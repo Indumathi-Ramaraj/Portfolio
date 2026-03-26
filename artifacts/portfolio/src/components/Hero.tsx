@@ -64,8 +64,7 @@ export function Hero() {
 
               <a 
                 href={personalInfo.resume}
-                target="_blank"
-                rel="noreferrer"
+                download="Indumathi_Ramaraj_Resume.pdf"
                 className="group px-8 py-4 glass-card text-white font-semibold rounded-xl flex items-center gap-2 hover:bg-white/5 hover:border-white/20 transition-all glow-card"
               >
                 Download Resume

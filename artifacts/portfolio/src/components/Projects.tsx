@@ -4,7 +4,7 @@ import { ExternalLink, Github } from 'lucide-react';
 import { projects } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
-const categories = ["All", "Full Stack", "Frontend", "Mobile"];
+const categories = ["All", "Full Stack", "Frontend"];
 
 export function Projects() {
   const [filter, setFilter] = useState("All");
