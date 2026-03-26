@@ -1,0 +1,14 @@
+packages:
+  "framer-motion": "Required for cinematic page transitions, scroll reveals, and complex UI animations"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility function to efficiently merge Tailwind CSS classes"
+
+images:
+  - path: "artifacts/portfolio/public/images/hero-mesh.png"
+    description: "Dark, futuristic abstract gradient mesh with deep violet, electric cyan, and pure black. Smooth organic shapes with a glowing, bioluminescent feel. Minimalist and premium, suitable for a dark-mode portfolio background."
+    aspect_ratio: "16:9"
+
+notes:
+  - Portfolio is fully static, no backend APIs required.
+  - Using framer-motion for all scroll and interaction animations.
+  - Relying on native smooth scrolling for section navigation.

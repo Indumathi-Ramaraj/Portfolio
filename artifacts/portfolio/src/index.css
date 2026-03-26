@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'Manrope', sans-serif;
+  --font-display: 'Syne', sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  
+  --color-glass: rgba(20, 20, 25, 0.6);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+}
+
+:root {
+  /* Dark mode by default for the futuristic premium feel */
+  --background: 240 10% 4%;
+  --foreground: 0 0% 95%;
+  
+  /* Electric Violet */
+  --primary: 262 83% 58%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Cyan/Teal */
+  --secondary: 189 94% 43%;
+  --secondary-foreground: 0 0% 100%;
+  
+  --accent: 316 73% 52%;
+  --accent-foreground: 0 0% 100%;
+  
+  --muted: 240 5% 15%;
+  --muted-foreground: 240 5% 65%;
+  
+  --border: 240 5% 15%;
+  --card: 240 8% 6%;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/30 selection:text-primary-foreground;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@layer utilities {
+  .animate-gradient {
+    animation: gradient 8s linear infinite;
+  }
+
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary)));
+    background-size: 200% auto;
+    animation: gradient 8s linear infinite;
+  }
+  
+  .glass-card {
+    @apply bg-white/[0.02] backdrop-blur-md border border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+  }
+
+  .glass-panel {
+    @apply bg-black/40 backdrop-blur-xl border-y border-white/[0.05];
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
