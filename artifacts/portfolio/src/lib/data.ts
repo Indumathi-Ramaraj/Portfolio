@@ -13,6 +13,7 @@ export const personalInfo = {
     { label: "Years Experience", value: 3, plus: true },
     { label: "Projects Completed", value: 20, plus: true },
     { label: "Technologies", value: 15, plus: true },
+    { label: "Technical Trainer", value: "React.js", plus: false },
   ]
 };
 
@@ -20,7 +21,7 @@ export const skills = {
   frontend: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Redux (Saga/Thunk)", "HTML5/CSS3", "Bootstrap", "TanStack Table"],
   backend: ["FastAPI", "Express.js", "Node.js", "RESTful APIs", "JWT Auth", "Swagger", "SQLAlchemy"],
   database: ["PostgreSQL", "MySQL", "MongoDB", "Azure Synapse"],
-  tools: ["Docker", "AWS", "GitHub", "GitLab", "JIRA", "Figma", "Postman", "Microsoft Azure"]
+  tools: ["Docker", "AWS", "GitHub", "GitLab", "JIRA", "Figma", "Postman", "Microsoft Azure", "Replit", "Antigravity", "Copilot"]
 };
 
 export const projects = [
@@ -66,6 +67,16 @@ export const projects = [
   },
   {
     id: 5,
+    title: "NonStop Traders",
+    description: "Contributed to building a full-featured e-commerce platform where customers can add products to wishlists and carts, manage orders, and complete purchases through a seamlessly integrated Razorpay payment gateway. Enhanced the overall UI experience with a modern, responsive design and integrated WhatsApp notifications to keep customers informed at every step of their shopping journey.",
+    category: "Frontend",
+    tech: ["React.js", "Node.js", "SCSS", "MongoDB"],
+    github: "#",
+    live: "https://nonstoptraders.com/",
+    color: "from-orange-500/20 to-amber-500/20"
+  },
+  {
+    id: 6,
     title: "Kompres",
     description: "Spearheaded the modernization of a decade-old codebase, enhancing system performance by 45%, and successfully integrated THINGS BOARD for real-time data management.",
     category: "Full Stack",
@@ -75,7 +86,7 @@ export const projects = [
     color: "from-violet-500/20 to-fuchsia-500/20"
   },
   {
-    id: 6,
+    id: 7,
     title: "COVID-19 Plasma Donation Portal",
     description: "Directed the UX design and development to connect plasma donors with recipients, increasing accessibility by 50%. Built an intuitive platform during a critical period to help communities in need.",
     category: "Frontend",

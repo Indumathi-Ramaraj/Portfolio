@@ -56,10 +56,16 @@ export function About() {
                     <Icon className="w-6 h-6" />
                   </div>
                   
-                  <div className="font-display text-5xl md:text-6xl font-bold text-white mb-2 flex items-center">
-                    {stat.value}
-                    {stat.plus && <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">+</span>}
-                  </div>
+                  {typeof stat.value === 'number' ? (
+                    <div className="font-display text-5xl md:text-6xl font-bold text-white mb-2 flex items-center">
+                      {stat.value}
+                      {stat.plus && <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">+</span>}
+                    </div>
+                  ) : (
+                    <div className="font-display text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">
+                      {stat.value}
+                    </div>
+                  )}
                   <div className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
                     {stat.label}
                   </div>

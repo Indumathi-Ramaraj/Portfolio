@@ -30,3 +30,4 @@ timeoutMs = 20000
 [userenv.shared]
 GMAIL_USER = "induammu223@gmail.com"
 CONTACT_TO_EMAIL = "induammu223@gmail.com"
+NOTIFY_PHONE = "+919952356475"

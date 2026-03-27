@@ -150,7 +150,7 @@ export function Contact() {
                   value={form.phone}
                   onChange={handleChange}
                   className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary focus:shadow-[0_0_15px_hsl(var(--secondary)/0.3)] transition-all"
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 9952356475"
                 />
               </div>
               
