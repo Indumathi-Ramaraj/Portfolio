@@ -18,10 +18,10 @@ export const personalInfo = {
 };
 
 export const skills = {
-  frontend: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Redux (Saga/Thunk)", "HTML5/CSS3", "Bootstrap", "TanStack Table"],
+  frontend: ["React.js", "Vue.js", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Redux (Saga/Thunk)", "Bootstrap", "TanStack Table"],
   backend: ["FastAPI", "Express.js", "Node.js", "RESTful APIs", "JWT Auth", "Swagger", "SQLAlchemy"],
   database: ["PostgreSQL", "MySQL", "MongoDB", "Azure Synapse"],
-  tools: ["Docker", "AWS", "GitHub", "GitLab", "JIRA", "Figma", "Postman", "Microsoft Azure", "Replit", "Antigravity", "Copilot"]
+  tools: ["Docker", "AWS", "GitHub", "GitLab", "JIRA", "Figma", "Postman", "Microsoft Azure", "Replit", "Antigravity", "Copilot", "Thoropass"]
 };
 
 export const projects = [
@@ -33,6 +33,7 @@ export const projects = [
     tech: ["React.js", "FastAPI", "Python", "PostgreSQL", "Docker", "AWS"],
     github: "#",
     live: "https://analytics.smartdatadashboard.com/login",
+    image: "/project-logos/smartdata.png",
     color: "from-rose-500/20 to-orange-500/20"
   },
   {
@@ -43,6 +44,7 @@ export const projects = [
     tech: ["React.js", "TypeScript", "PostgreSQL", "Azure", "REST APIs"],
     github: "#",
     live: "https://myops360.834labs.com/login",
+    image: "/project-logos/myops.png",
     color: "from-amber-500/20 to-yellow-500/20"
   },
   {
@@ -53,6 +55,7 @@ export const projects = [
     tech: ["React.js", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT"],
     github: "#",
     live: "https://mern-todo-app-tan.vercel.app/",
+    image: "/project-logos/todo.png",
     color: "from-cyan-500/20 to-blue-500/20"
   },
   {
@@ -63,6 +66,7 @@ export const projects = [
     tech: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
     github: "#",
     live: "https://hellofixy.com",
+    image: "/project-logos/hellofixy.png",
     color: "from-emerald-500/20 to-teal-500/20"
   },
   {
@@ -73,6 +77,7 @@ export const projects = [
     tech: ["React.js", "Node.js", "SCSS", "MongoDB"],
     github: "#",
     live: "https://nonstoptraders.com/",
+    image: "/project-logos/nonstoptraders.png",
     color: "from-orange-500/20 to-amber-500/20"
   },
   {
@@ -83,16 +88,29 @@ export const projects = [
     tech: ["React.js", "Things Board", "PostgreSQL", "REST APIs"],
     github: "#",
     live: "https://www.utvyakta.com/",
+    image: "/project-logos/kompres.png",
     color: "from-violet-500/20 to-fuchsia-500/20"
   },
   {
     id: 7,
+    title: "BoostMyShop – Pricing Dashboard",
+    description: "Engineered seamless API integrations at BoostMyShop to enable real-time pricing data synchronization across e-commerce platforms. Developed a robust in-platform chat feature that streamlined communication between customers and market personnel, significantly improving support efficiency and overall user experience.",
+    category: "Full Stack",
+    tech: ["Vue.js", "PHP", "REST APIs", "Node.js", "MySQL"],
+    github: "#",
+    live: "https://pricing.boostmyshop.com/en/dashboard",
+    image: "/project-logos/boostmyshop.png",
+    color: "from-blue-600/20 to-indigo-600/20"
+  },
+  {
+    id: 8,
     title: "COVID-19 Plasma Donation Portal",
     description: "Directed the UX design and development to connect plasma donors with recipients, increasing accessibility by 50%. Built an intuitive platform during a critical period to help communities in need.",
     category: "Frontend",
     tech: ["React.js", "HTML5", "CSS3", "JavaScript"],
     github: "#",
     live: "#",
+    image: "",
     color: "from-pink-500/20 to-rose-500/20"
   }
 ];
@@ -113,7 +131,7 @@ export const experience = [
     company: "BoostMyShop Pvt Ltd",
     period: "July 2021 - September 2022",
     current: false,
-    description: "Developed seamless API integrations to facilitate real-time data synchronization. Built a robust chat feature to enhance communication between customers and market personnel, improving user experience and support efficiency.",
+    description: "Developed seamless API integrations to facilitate real-time data synchronization. Developed a robust chat feature to enhance communication between customers and market personnel, improving user experience and support efficiency.",
     projects: []
   },
   {
