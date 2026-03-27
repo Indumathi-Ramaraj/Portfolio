@@ -9,7 +9,7 @@ const categories = ["All", "Full Stack", "Frontend"];
 export function Projects() {
   const [filter, setFilter] = useState("All");
 
-  const filteredProjects = projects.filter(project => 
+  const filteredProjects = projects.filter(project =>
     filter === "All" ? true : project.category === filter
   );
 
@@ -21,7 +21,7 @@ export function Projects() {
             <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">Portfolio</h2>
             <h3 className="font-display text-4xl md:text-5xl font-bold text-white">Featured Work</h3>
           </div>
-          
+
           <div className="flex flex-wrap gap-2 p-1.5 glass-card rounded-full border border-white/10">
             {categories.map(cat => (
               <button
@@ -29,9 +29,7 @@ export function Projects() {
                 onClick={() => setFilter(cat)}
                 className={cn(
                   "px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative",
-                  filter === cat 
-                    ? "text-white" 
-                    : "text-muted-foreground hover:text-white"
+                  filter === cat ? "text-white" : "text-muted-foreground hover:text-white"
                 )}
               >
                 {filter === cat && (
@@ -59,42 +57,68 @@ export function Projects() {
                 key={project.id}
                 className="group glass-card rounded-2xl overflow-hidden flex flex-col h-full hover:shadow-[0_10px_40px_-15px_hsl(var(--primary)/0.3)] transition-all duration-500 relative"
               >
-                {/* Gradient top border on hover */}
+                {/* Animated gradient top border */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20"></div>
 
-                {/* Project Image Area */}
-                <div className="relative h-56 w-full overflow-hidden">
-                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-80 group-hover:scale-110 group-hover:opacity-50 transition-all duration-700", project.color)}></div>
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50"></div>
-                  
-                  {/* VIEW PROJECT OVERLAY */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
-                    <span className="font-display font-bold text-2xl tracking-widest text-white/90 drop-shadow-lg scale-90 group-hover:scale-100 transition-transform duration-500">VIEW PROJECT</span>
+                {/* Card image / logo area */}
+                <div className="relative h-52 w-full overflow-hidden bg-black/60">
+                  {/* Subtle color tint from project palette */}
+                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30 group-hover:opacity-20 transition-opacity duration-700", project.color)}></div>
+
+                  {project.image ? (
+                    /* Real project logo */
+                    <div className="absolute inset-0 flex items-center justify-center p-8">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="max-h-full max-w-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  ) : (
+                    /* Fallback pattern */
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-display font-bold text-5xl text-white/10 tracking-widest select-none">
+                        {project.title.split(" ").map(w => w[0]).join("").slice(0, 3)}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center gap-3">
+                    <span className="font-display font-bold text-xl tracking-widest text-white/90 drop-shadow-lg">
+                      VIEW PROJECT
+                    </span>
                   </div>
 
-                  {/* Only show live link button (no GitHub) */}
+                  {/* Live link button */}
                   {project.live !== "#" && (
-                    <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-20">
-                      <a 
-                        href={project.live} 
-                        target="_blank" 
+                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-20">
+                      <a
+                        href={project.live}
+                        target="_blank"
                         rel="noreferrer"
-                        className="p-2 bg-black/60 backdrop-blur-md rounded-full text-white hover:bg-primary transition-colors hover:scale-110"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-black/70 backdrop-blur-md rounded-full text-white text-xs font-semibold hover:bg-primary transition-colors border border-white/10"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink className="w-3 h-3" />
+                        Live
                       </a>
                     </div>
                   )}
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-grow relative bg-card/50">
-                  <div className="text-xs font-bold text-primary mb-3 uppercase tracking-widest">{project.category}</div>
-                  <h4 className="font-display text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all duration-300">{project.title}</h4>
-                  <p className="text-muted-foreground text-sm mb-8 flex-grow leading-relaxed">{project.description}</p>
-                  
+                  <div className="text-xs font-bold text-primary mb-2 uppercase tracking-widest">{project.category}</div>
+                  <h4 className="font-display text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all duration-300 leading-tight">
+                    {project.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm mb-6 flex-grow leading-relaxed">{project.description}</p>
+
                   <div className="flex flex-wrap gap-2 mt-auto">
                     {project.tech.map(t => (
-                      <span key={t} className="text-xs font-semibold text-white/80 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 group-hover:border-white/20 transition-colors">
+                      <span
+                        key={t}
+                        className="text-xs font-semibold text-white/80 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 group-hover:border-white/20 transition-colors"
+                      >
                         {t}
                       </span>
                     ))}
