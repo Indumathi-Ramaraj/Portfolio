@@ -5,9 +5,9 @@ import { Typewriter } from './Typewriter';
 
 const roles = [
   "Full Stack Developer",
-  "UI/UX Enthusiast",
   "Problem Solver",
-  "Tech Innovator"
+  "Tech Innovator",
+  "React.js Expert"
 ];
 
 export function Hero() {
