@@ -3,49 +3,72 @@ import nodemailer from "nodemailer";
 
 const router: IRouter = Router();
 
-const OWNER_PHONE = process.env.NOTIFY_PHONE || "+919952356475";
+const OWNER_PHONE = process.env.NOTIFY_PHONE || "9952356475";
 
-async function sendSMS(name: string, email: string, phone: string, message: string, log: typeof router.post extends (...args: any[]) => any ? never : any) {
-  const smsBody = `📩 New Portfolio Message!\nFrom: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ""}\n\n${message.substring(0, 100)}${message.length > 100 ? "..." : ""}`;
+function extractDigits(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  return digits.startsWith("91") && digits.length === 12 ? digits.slice(2) : digits;
+}
+
+async function sendSMS(name: string, email: string, phone: string, message: string, log: any) {
+  const smsBody = `New Portfolio Message!\nFrom: ${name}\nEmail: ${email}${phone ? `\nPhone: ${phone}` : ""}\n\n${message.substring(0, 80)}${message.length > 80 ? "..." : ""}`;
+
+  const fast2smsKey = process.env.FAST2SMS_API_KEY;
+  if (fast2smsKey) {
+    const ownerDigits = extractDigits(OWNER_PHONE);
+    try {
+      const resp = await fetch("https://www.fast2sms.com/dev/bulkV2", {
+        method: "POST",
+        headers: {
+          authorization: fast2smsKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          route: "q",
+          message: smsBody,
+          language: "english",
+          flash: 0,
+          numbers: ownerDigits,
+        }),
+      });
+      const data = await resp.json() as { return: boolean; message?: string[]; status_code?: number };
+      if (data.return) {
+        return { provider: "fast2sms", success: true };
+      }
+      return { provider: "fast2sms", success: false, error: data.message?.join(", ") };
+    } catch (err: any) {
+      log.warn({ err }, "Fast2SMS error");
+    }
+  }
 
   const twilioSid = process.env.TWILIO_ACCOUNT_SID;
   const twilioToken = process.env.TWILIO_AUTH_TOKEN;
   const twilioFrom = process.env.TWILIO_PHONE_NUMBER;
-
   if (twilioSid && twilioToken && twilioFrom) {
     const params = new URLSearchParams({
       From: twilioFrom,
-      To: OWNER_PHONE,
+      To: `+91${extractDigits(OWNER_PHONE)}`,
       Body: smsBody,
     });
-    const resp = await fetch(
-      `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Basic " + Buffer.from(`${twilioSid}:${twilioToken}`).toString("base64"),
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: params.toString(),
-      }
-    );
-    if (resp.ok) {
-      return { provider: "twilio", success: true };
+    try {
+      const resp = await fetch(
+        `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Basic " + Buffer.from(`${twilioSid}:${twilioToken}`).toString("base64"),
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: params.toString(),
+        }
+      );
+      if (resp.ok) return { provider: "twilio", success: true };
+    } catch (err: any) {
+      log.warn({ err }, "Twilio error");
     }
   }
 
-  const tbParams = new URLSearchParams({
-    phone: OWNER_PHONE,
-    message: smsBody,
-    key: process.env.TEXTBELT_KEY || "textbelt",
-  });
-  const tbResp = await fetch("https://textbelt.com/text", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: tbParams.toString(),
-  });
-  const tbData = await tbResp.json() as { success: boolean; quotaRemaining?: number; error?: string };
-  return { provider: "textbelt", success: tbData.success, quota: tbData.quotaRemaining, error: tbData.error };
+  return { provider: "none", success: false, error: "No SMS provider configured for +91 numbers. Set FAST2SMS_API_KEY to enable SMS notifications." };
 }
 
 router.post("/contact", async (req, res) => {
@@ -92,7 +115,7 @@ router.post("/contact", async (req, res) => {
       `,
     });
 
-    req.log.info({ name, email }, "Contact email sent");
+    req.log.info({ email }, "Contact email sent");
 
     try {
       const smsResult = await sendSMS(name, email, phone || "", message, req.log);
