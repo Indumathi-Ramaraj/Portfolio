@@ -88,7 +88,7 @@ export function Skills() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="flex flex-wrap gap-3 mt-auto"
+                className="flex flex-wrap gap-3"
               >
                 {category.items.map(skill => (
                   <motion.span

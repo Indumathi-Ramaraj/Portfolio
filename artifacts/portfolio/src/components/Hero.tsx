@@ -41,7 +41,7 @@ export function Hero() {
             </h1>
 
             <div className="h-16 sm:h-20 md:h-24 mb-6">
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gradient">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white">
                 <Typewriter words={roles} />
               </h2>
             </div>
