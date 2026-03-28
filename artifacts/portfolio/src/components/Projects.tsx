@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
-import { projects } from '@/lib/data';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import { projects } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 const categories = ["All", "Full Stack", "Frontend"];
 
 export function Projects() {
   const [filter, setFilter] = useState("All");
 
-  const filteredProjects = projects.filter(project =>
-    filter === "All" ? true : project.category === filter
+  const filteredProjects = projects.filter((project) =>
+    filter === "All" ? true : project.category === filter,
   );
 
   return (
@@ -18,18 +18,24 @@ export function Projects() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
-            <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">Portfolio</h2>
-            <h3 className="font-display text-4xl md:text-5xl font-bold text-white">Featured Work</h3>
+            <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">
+              Portfolio
+            </h2>
+            <h3 className="font-display text-4xl md:text-5xl font-bold text-white">
+              Featured Work
+            </h3>
           </div>
 
           <div className="flex flex-wrap gap-2 p-1.5 glass-card rounded-full border border-white/10">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
                 className={cn(
                   "px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative",
-                  filter === cat ? "text-white" : "text-muted-foreground hover:text-white"
+                  filter === cat
+                    ? "text-white"
+                    : "text-muted-foreground hover:text-white",
                 )}
               >
                 {filter === cat && (
@@ -45,7 +51,10 @@ export function Projects() {
           </div>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.div
@@ -63,25 +72,22 @@ export function Projects() {
                 {/* Card image / logo area */}
                 <div className="relative h-52 w-full overflow-hidden bg-black/60">
                   {/* Subtle color tint from project palette */}
-                  <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30 group-hover:opacity-20 transition-opacity duration-700", project.color)}></div>
+                  <div
+                    className={cn(
+                      "absolute inset-0 bg-gradient-to-br opacity-30 group-hover:opacity-20 transition-opacity duration-700",
+                      project.color,
+                    )}
+                  ></div>
 
-                  {project.image ? (
-                    /* Real project logo */
-                    <div className="absolute inset-0 flex items-center justify-center p-8">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="max-h-full max-w-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  ) : (
-                    /* Fallback pattern */
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-display font-bold text-5xl text-white/10 tracking-widest select-none">
-                        {project.title.split(" ").map(w => w[0]).join("").slice(0, 3)}
-                      </span>
-                    </div>
-                  )}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display font-bold text-5xl text-white/10 tracking-widest select-none">
+                      {project.title
+                        .split(" ")
+                        .map((w) => w[0])
+                        .join("")
+                        .slice(0, 3)}
+                    </span>
+                  </div>
 
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center gap-3">
@@ -107,14 +113,18 @@ export function Projects() {
                 </div>
 
                 <div className="p-6 md:p-8 flex flex-col flex-grow relative bg-card/50">
-                  <div className="text-xs font-bold text-primary mb-2 uppercase tracking-widest">{project.category}</div>
+                  <div className="text-xs font-bold text-primary mb-2 uppercase tracking-widest">
+                    {project.category}
+                  </div>
                   <h4 className="font-display text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all duration-300 leading-tight">
                     {project.title}
                   </h4>
-                  <p className="text-muted-foreground text-sm mb-6 flex-grow leading-relaxed">{project.description}</p>
+                  <p className="text-muted-foreground text-sm mb-6 flex-grow leading-relaxed">
+                    {project.description}
+                  </p>
 
                   <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tech.map(t => (
+                    {project.tech.map((t) => (
                       <span
                         key={t}
                         className="text-xs font-semibold text-white/80 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 group-hover:border-white/20 transition-colors"

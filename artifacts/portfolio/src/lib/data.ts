@@ -33,7 +33,6 @@ export const projects = [
     tech: ["React.js", "FastAPI", "Python", "PostgreSQL", "Docker", "AWS"],
     github: "#",
     live: "https://analytics.smartdatadashboard.com/login",
-    image: "/project-logos/smartdata.png",
     color: "from-rose-500/20 to-orange-500/20"
   },
   {
@@ -44,7 +43,6 @@ export const projects = [
     tech: ["React.js", "TypeScript", "PostgreSQL", "Azure", "REST APIs"],
     github: "#",
     live: "https://myops360.834labs.com/login",
-    image: "/project-logos/myops.png",
     color: "from-amber-500/20 to-yellow-500/20"
   },
   {
@@ -55,7 +53,6 @@ export const projects = [
     tech: ["React.js", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT"],
     github: "#",
     live: "https://mern-todo-app-tan.vercel.app/",
-    image: "/project-logos/todo.png",
     color: "from-cyan-500/20 to-blue-500/20"
   },
   {
@@ -66,7 +63,6 @@ export const projects = [
     tech: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
     github: "#",
     live: "https://hellofixy.com",
-    image: "/project-logos/hellofixy.png",
     color: "from-emerald-500/20 to-teal-500/20"
   },
   {
@@ -77,7 +73,6 @@ export const projects = [
     tech: ["React.js", "Node.js", "SCSS", "MongoDB"],
     github: "#",
     live: "https://nonstoptraders.com/",
-    image: "/project-logos/nonstoptraders.png",
     color: "from-orange-500/20 to-amber-500/20"
   },
   {
@@ -88,7 +83,6 @@ export const projects = [
     tech: ["React.js", "Things Board", "PostgreSQL", "REST APIs"],
     github: "#",
     live: "https://www.utvyakta.com/",
-    image: "/project-logos/kompres.png",
     color: "from-violet-500/20 to-fuchsia-500/20"
   },
   {
@@ -99,7 +93,6 @@ export const projects = [
     tech: ["Vue.js", "PHP", "REST APIs", "Node.js", "MySQL"],
     github: "#",
     live: "https://pricing.boostmyshop.com/en/dashboard",
-    image: "/project-logos/boostmyshop.png",
     color: "from-blue-600/20 to-indigo-600/20"
   },
   {

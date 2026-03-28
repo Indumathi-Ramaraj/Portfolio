@@ -1,18 +1,22 @@
-import { motion } from 'framer-motion';
-import { Code2, Database, Layout, Terminal } from 'lucide-react';
-import { skills } from '@/lib/data';
+import { motion } from "framer-motion";
+import { Code2, Database, Layout, Terminal } from "lucide-react";
+import { skills } from "@/lib/data";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.08 }
-  }
+    transition: { staggerChildren: 0.08 },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring" as const, stiffness: 300, damping: 24 },
+  },
 };
 
 export function Skills() {
@@ -23,7 +27,8 @@ export function Skills() {
       items: skills.frontend,
       bgClass: "bg-gradient-to-br from-primary/20 to-primary/5",
       borderClass: "border-primary/20",
-      pillClass: "border-primary/30 text-white/90 hover:shadow-[0_0_15px_hsl(var(--primary)/0.4)]",
+      pillClass:
+        "border-primary/30 text-white/90 hover:shadow-[0_0_15px_hsl(var(--primary)/0.4)]",
       colSpan: "md:col-span-2 lg:col-span-3",
     },
     {
@@ -32,7 +37,8 @@ export function Skills() {
       items: skills.backend,
       bgClass: "bg-gradient-to-br from-secondary/20 to-secondary/5",
       borderClass: "border-secondary/20",
-      pillClass: "border-secondary/30 text-white/90 hover:shadow-[0_0_15px_hsl(var(--secondary)/0.4)]",
+      pillClass:
+        "border-secondary/30 text-white/90 hover:shadow-[0_0_15px_hsl(var(--secondary)/0.4)]",
       colSpan: "md:col-span-1 lg:col-span-2",
     },
     {
@@ -41,7 +47,8 @@ export function Skills() {
       items: skills.database,
       bgClass: "bg-gradient-to-br from-accent/20 to-accent/5",
       borderClass: "border-accent/20",
-      pillClass: "border-accent/30 text-white/90 hover:shadow-[0_0_15px_hsl(var(--accent)/0.4)]",
+      pillClass:
+        "border-accent/30 text-white/90 hover:shadow-[0_0_15px_hsl(var(--accent)/0.4)]",
       colSpan: "md:col-span-1 lg:col-span-2",
     },
     {
@@ -50,9 +57,10 @@ export function Skills() {
       items: skills.tools,
       bgClass: "bg-gradient-to-br from-emerald-500/20 to-emerald-500/5",
       borderClass: "border-emerald-500/20",
-      pillClass: "border-emerald-500/30 text-white/90 hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]",
+      pillClass:
+        "border-emerald-500/30 text-white/90 hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]",
       colSpan: "md:col-span-2 lg:col-span-3",
-    }
+    },
   ];
 
   return (
@@ -61,8 +69,12 @@ export function Skills() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">Expertise</h2>
-          <h3 className="font-display text-4xl md:text-5xl font-bold text-white">Technical Arsenal</h3>
+          <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-3">
+            Expertise
+          </h2>
+          <h3 className="font-display text-4xl md:text-5xl font-bold text-white">
+            Technical Arsenal
+          </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 auto-rows-min">
@@ -79,7 +91,9 @@ export function Skills() {
                 <div className="w-14 h-14 rounded-2xl bg-black/20 border border-white/10 flex items-center justify-center shadow-inner">
                   {category.icon}
                 </div>
-                <h4 className="font-display text-2xl font-bold text-white">{category.title}</h4>
+                <h4 className="font-display text-2xl font-bold text-white">
+                  {category.title}
+                </h4>
               </div>
 
               <motion.div
@@ -89,7 +103,7 @@ export function Skills() {
                 viewport={{ once: false }}
                 className="flex flex-wrap gap-3"
               >
-                {category.items.map(skill => (
+                {category.items.map((skill) => (
                   <motion.span
                     key={skill}
                     variants={itemVariants}
